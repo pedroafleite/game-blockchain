@@ -1,35 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
-{
-/*     public float moveSpeed = 1f;
+{    public float moveSpeed = 1f;
     public float collisionOffset = 0.05f;
-    public ContractFilter2D movementFilter;
+    public ContactFilter2D movementFilter;
 
     Vector2 movementInput;
-    RigidBody2D rb;
-    List<RaycastHit2D> castCollisions = new List<RaycastHit2D>(); */
+    Rigidbody2D rb;
+    List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
 
     // Start is called before the first frame update
     void Start()
     {
-        /* rb = GetComponent<RigidBody2D>(); */
+        rb = GetComponent<Rigidbody2D>();
         
     }
 
-/*     private void FixedUpdate() {
+    private void FixedUpdate() {
+        // If movement input is not 0, try to move
         if(movementInput != Vector2.zero){
+            // Check for potential collisions
             int count = rb.Cast(
                 movementInput,
                 movementFilter,
                 castCollisions,
                 moveSpeed = Time.fixedDeltaTime + collisionOffset);
+            
+            // Debug.Log(count);
+            
+            if(count == 0) {                
+                rb.MovePosition(rb.position + movementInput * moveSpeed * Time.fixedDeltaTime);
+            }
         }
-    } */
+    }
 
-/*     void OnMove(InputValue movementValue) {
+    void OnMove(InputValue movementValue) {
         movementInput = movementValue.Get<Vector2>();
-    } */
+    }
 }

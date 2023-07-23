@@ -4589,9 +4589,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2338577330845798955, guid: 310f98708924adc42a036671d902ccfa, type: 3}
+      propertyPath: m_Size.x
+      value: 0.0915429
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338577330845798955, guid: 310f98708924adc42a036671d902ccfa, type: 3}
+      propertyPath: m_Size.y
+      value: 0.035666317
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338577330845798955, guid: 310f98708924adc42a036671d902ccfa, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338577330845798955, guid: 310f98708924adc42a036671d902ccfa, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.15912773
+      objectReference: {fileID: 0}
     - target: {fileID: 6149064215215035044, guid: 310f98708924adc42a036671d902ccfa, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764486988831176758, guid: 310f98708924adc42a036671d902ccfa, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764486988831176758, guid: 310f98708924adc42a036671d902ccfa, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880924398565600157, guid: 310f98708924adc42a036671d902ccfa, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
