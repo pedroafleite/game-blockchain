@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 {   public float moveSpeed = 1f;
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
-
     Vector2 movementInput;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rb;
@@ -20,7 +19,7 @@ public class PlayerController : MonoBehaviour
         // Fetch the Rigidbody from the GameObject with this script attached
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        setRotation(1, 0);
     }
 
     private void FixedUpdate() {
@@ -29,24 +28,24 @@ public class PlayerController : MonoBehaviour
             bool success = tryMove(movementInput); // Check for potential collisions
             if(!success) {
                 success = tryMove(new Vector2(movementInput.x, 0));
-                if(!success) {
+                if(!success)
                     success = tryMove(new Vector2(0, movementInput.y));
-                }
             }
 
-            animator.SetFloat("moveX", movementInput.x);
-            animator.SetFloat("moveY", movementInput.y);
+            setRotation(movementInput.x, movementInput.y);
+
+            if (movementInput.x < 0 && movementInput.y > 0)
+                setRotation(0, 1);
+            if (movementInput.x < 0 && movementInput.y < 0)
+                setRotation(0, -1);
+
             animator.SetBool("isMoving", true);
         } else {
             animator.SetBool("isMoving", false);
         }
 
-        // // Set direction of sprite to movement direction
-        // if(movementInput.x < 0) {
-        //     spriteRenderer.flipX = true;
-        // } else if (movementInput.x > 0) {
-        //     spriteRenderer.flipX = false;
-        // }
+        if (Input.GetKeyDown(KeyCode.Z))
+            Interact();
     }
 
     private bool tryMove(Vector2 direction) {
@@ -68,4 +67,16 @@ public class PlayerController : MonoBehaviour
         movementInput = movementValue.Get<Vector2>();
     }
 
+    private void setRotation(float x, float y) {
+        animator.SetFloat("moveX", x);
+        animator.SetFloat("moveY", y);
+    }
+
+    private void Interact() {
+        var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        var interactPos = transform.position + facingDir;
+
+        Debug.DrawLine(transform.position, interactPos, Color.red, 1f);
+    }
+    
 }
