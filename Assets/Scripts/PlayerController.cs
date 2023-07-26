@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
-{   public float moveSpeed = 1f;
+{   
+    public float moveSpeed = 1f;
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
     public LayerMask interactableLayer;
@@ -14,19 +15,16 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
 
-    // Start is called before the first frame update
     void Start()
     {
-        // Fetch the Rigidbody from the GameObject with this script attached
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         setRotation(1, 0);
     }
 
     private void FixedUpdate() {
-        // If movement input is not 0, try to move
         if(movementInput != Vector2.zero){
-            bool success = tryMove(movementInput); // Check for potential collisions
+            bool success = tryMove(movementInput);
             if(!success) {
                 success = tryMove(new Vector2(movementInput.x, 0));
                 if(!success)
@@ -81,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
         var collider = Physics2D.OverlapCircle(interactPos, 1f, interactableLayer);
         if(collider != null) {
-            Debug.Log("there is an NPC here!");
+            collider.GetComponent<Interactable>()?.Interact();
         } else {
             Debug.Log("No NPC here!");
         }
