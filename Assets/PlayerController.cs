@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {   public float moveSpeed = 1f;
     public float collisionOffset = 0.05f;
     public ContactFilter2D movementFilter;
+    public LayerMask interactableLayer;
     Vector2 movementInput;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rb;
@@ -76,7 +77,14 @@ public class PlayerController : MonoBehaviour
         var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
         var interactPos = transform.position + facingDir;
 
-        Debug.DrawLine(transform.position, interactPos, Color.red, 1f);
+        Debug.DrawLine(transform.position, interactPos, Color.red, 0.3f);
+
+        var collider = Physics2D.OverlapCircle(interactPos, 1f, interactableLayer);
+        if(collider != null) {
+            Debug.Log("there is an NPC here!");
+        } else {
+            Debug.Log("No NPC here!");
+        }
     }
     
 }
